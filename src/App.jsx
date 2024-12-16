@@ -1,15 +1,25 @@
-import { useSelector, useDispatch } from "react-redux"
-import { addToCart,removeFromCart } from "./reduxSlices/cartSlice";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./layout"
+import Home from "./Pages/home"
+import Desktop from "./Pages/desktop"
+import Laptop from "./Pages/laptop"
+import Mobile from "./Pages/mobile"
+import Cart from "./Pages/cart"
 
 const App=()=> {
- const cart = useSelector(state => state.cart.data)
- const dispatch = useDispatch();
   return (
-    <div>
-      <button onClick={()=>dispatch(removeFromCart())}>Remove</button>
-      {cart}
-      <button onClick={()=>dispatch(addToCart())}>Add</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />} >
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/desktop" element={<Desktop />} />
+          <Route path="/laptop" element={<Laptop />} />
+          <Route path="/mobile" element={<Mobile />} />
+          <Route path="/cart" element={<Cart />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
